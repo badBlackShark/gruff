@@ -125,7 +125,7 @@ class Gruff::SideBar < Gruff::Base
       @d.font = @font if @font
       @d.stroke = 'transparent'
       @d.font_weight = NormalWeight
-      @d.pointsize = scale_fontsize(@marker_font_size)
+      @d.pointsize = @label_font_size ? @label_font_size : scale_fontsize(@marker_font_size)
       @d.gravity = EastGravity
       @d = @d.annotate_scaled(@base_image,
                               1, 1,

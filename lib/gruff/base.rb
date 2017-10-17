@@ -68,6 +68,9 @@ module Gruff
     # Example: 0 => 2005, 3 => 2006, 5 => 2007, 7 => 2008
     attr_accessor :labels
 
+    # The font size of the labels on the graph's axis.
+    attr_accessor :label_font_size
+
     # Used internally for spacing.
     #
     # By default, labels are centered over the point they represent.
@@ -120,7 +123,7 @@ module Gruff
 
     # Same as font but for the title.
     attr_accessor :title_font
-    
+
     # Specifies whether to draw the title bolded or not.
     attr_accessor :bold_title
 
@@ -859,7 +862,7 @@ module Gruff
           @d.font = @font if @font
           @d.stroke('transparent')
           @d.font_weight = NormalWeight
-          @d.pointsize = scale_fontsize(@marker_font_size)
+          @d.pointsize = @label_font_size ? @label_font_size : scale_fontsize(@marker_font_size)
           @d.gravity = NorthGravity
           @d = @d.annotate_scaled(@base_image,
                                   1.0, 1.0,
