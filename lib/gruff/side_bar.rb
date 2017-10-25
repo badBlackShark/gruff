@@ -91,8 +91,8 @@ class Gruff::SideBar < Gruff::Base
 
     # TODO Round maximum marker value to a round number like 100, 0.1, 0.5, etc.
     increment = significant(@spread.to_f / number_of_lines)
-    (0..number_of_lines).each do |index|
 
+    (0..number_of_lines).each do |index|
       line_diff = (@graph_right - @graph_left) / number_of_lines
       x = @graph_right - (line_diff * index) - 1
       @d = @d.line(x, @graph_bottom, x, @graph_top)
@@ -106,10 +106,18 @@ class Gruff::SideBar < Gruff::Base
         @d.pointsize = scale_fontsize(@marker_font_size)
         @d.gravity = CenterGravity
         # TODO Center text over line
+
+        m_label = ""
+        if marker_label % 1 == 0
+          m_label = "%.0f" % marker_label.to_s
+        else marker_label
+          m_label = "%.1f" % marker_label.to_s
+        end
+
         @d = @d.annotate_scaled(@base_image,
                                 0, 0, # Width of box to draw text in
                                 x, @graph_bottom + (LABEL_MARGIN * 2.0), # Coordinates of text
-                                marker_label.to_s, @scale)
+                                m_label, @scale)
       end # unless
       @d = @d.stroke_antialias true
     end

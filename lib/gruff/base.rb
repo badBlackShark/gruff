@@ -537,7 +537,7 @@ module Gruff
       @spread = @spread > 0 ? @spread : 1
     end
 
-    ##
+    ##/
     # Calculates size of drawable area, general font dimensions, etc.
 
     def setup_graph_measurements
